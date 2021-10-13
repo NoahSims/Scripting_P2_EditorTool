@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ShopItemData : ScriptableObject
 {
-
+    public LootableObject shopItem;
 }

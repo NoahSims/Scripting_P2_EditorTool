@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f23e065055e2714f81d5741ab60826c, type: 3}
+  m_Name: Lesser Healing Potion
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  displayName: Lesser Healing Potion
+  monetaryValue: 50
+  description: Heals you a small amount
+  potionEffect: 0
+  potionStrength: 20
