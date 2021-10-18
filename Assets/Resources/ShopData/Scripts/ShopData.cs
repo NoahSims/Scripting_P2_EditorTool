@@ -9,6 +9,6 @@ public class ShopData : ScriptableObject
     public bool hasLimitedMoney;
     public int money;
 
-    public List<ShopItemData> ShopList = new List<ShopItemData>();
+    public List<LootableObject> ShopList = new List<LootableObject>();
 
 }
