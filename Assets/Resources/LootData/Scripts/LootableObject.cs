@@ -8,6 +8,7 @@ public class LootableObject : ScriptableObject
     public string displayName;
     public int monetaryValue;
     public string description;
+    public Texture2D thumbnail;
 
     public virtual string PrintStats()
     {

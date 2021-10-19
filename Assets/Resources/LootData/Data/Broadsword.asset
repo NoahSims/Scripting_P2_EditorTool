@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: Broadsword
   monetaryValue: 100
   description: A basic broadsword
+  thumbnail: {fileID: 2800000, guid: a94bb83e7eab1a84aa04b0fa37c0b983, type: 3}
   weaponType: 0
   damageType: 2
   elementalType: 0
