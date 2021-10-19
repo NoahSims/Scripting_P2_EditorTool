@@ -16,6 +16,9 @@ public class ShopDesignerWindow : EditorWindow
     Color shopInventorySectionColor = new Color(55f/255f, 32f/255f, 75f/255f, 0.8f);
     Rect shopInventorySection;
 
+    //GUIStyle shopInventoryItemStyle = new GUIStyle(GUI.skin.label);
+    //EditorStyles shopInventoryItemStyle = new EditorStyles(EditorStyles.)
+
     [MenuItem("Window/Shop Designer")]
     static void OpenWindow()
     {
@@ -27,8 +30,16 @@ public class ShopDesignerWindow : EditorWindow
     private void OnEnable()
     {
         InitTextures();
+        //InitStyles();
         InitData();
     }
+
+    /*
+    private void InitStyles()
+    {
+        shopInventoryItemStyle.margin = new RectOffset(20, 20, 0, 0);
+    }
+    */
 
     private void InitTextures()
     {
@@ -125,10 +136,13 @@ public class ShopDesignerWindow : EditorWindow
             {
                 //DrawInventoryLayout(i);
                 //GUILayout.BeginArea(shopInventorySection);
-                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.BeginVertical("box");
+                //EditorGUILayout.BeginHorizontal("box", GUILayout.Height(40f));
+                //GUILayout.FlexibleSpace();
                 SerializedObject sid = new SerializedObject(shopData.ShopList[i]);
                 SerializedProperty shopItem = sid.FindProperty("shopItem");
                 LootableObject shopObject = (LootableObject)shopItem.objectReferenceValue;
+                
                 if (shopObject == null)
                 {
                     //GUILayout.Label("Enter an item");
@@ -138,12 +152,66 @@ public class ShopDesignerWindow : EditorWindow
                 {
                     
                     EditorGUILayout.PropertyField(shopItem, true);
-                    
+
+                    EditorGUILayout.BeginHorizontal();
+
+                    // show item thumbnail
+                    Rect itemData = EditorGUILayout.BeginVertical("box", GUILayout.Height(60), GUILayout.Width(60));
+                    GUILayout.Label(" ");
+                    Texture2D itemThumbnail = shopObject.thumbnail;
+                    if (itemThumbnail != null)
+                    {
+                        GUI.DrawTexture(itemData, itemThumbnail, ScaleMode.ScaleToFit);
+                    }
+                    EditorGUILayout.EndVertical();
+
+                    // item stats
+                    EditorGUILayout.BeginVertical();
                     SerializedProperty shopItemQuant = sid.FindProperty("Quantity");
                     EditorGUILayout.PropertyField(shopItemQuant, true);
-                }
-                EditorGUILayout.EndHorizontal();
 
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Label("Base value: {" + shopObject.monetaryValue + "} * ");
+                    SerializedProperty shopItemSellMultiplier = sid.FindProperty("SellMultiplier");
+                    EditorGUILayout.PropertyField(shopItemSellMultiplier, true);
+                    GUILayout.Label(" = " + Mathf.Round(shopObject.monetaryValue * shopItemSellMultiplier.floatValue));
+                    GUILayout.FlexibleSpace();
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Label("Base value: {" + shopObject.monetaryValue + "} * ");
+                    SerializedProperty shopItemRefundMultiplier = sid.FindProperty("RefundMultiplier");
+                    EditorGUILayout.PropertyField(shopItemRefundMultiplier, true);
+                    GUILayout.Label(" = -" + Mathf.Round(shopObject.monetaryValue * shopItemRefundMultiplier.floatValue));
+                    GUILayout.FlexibleSpace();
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.EndVertical();
+
+                    // item options
+                    EditorGUILayout.BeginVertical("box");
+                    if (GUILayout.Button("Move Up") && i != 0)
+                    {
+                        ShopItemData temp = shopData.ShopList[i - 1];
+                        shopData.ShopList[i - 1] = shopData.ShopList[i];
+                        shopData.ShopList[i] = temp;
+                    }
+                    if (GUILayout.Button("Move Down") && i != shopData.ShopList.Count - 1)
+                    {
+                        ShopItemData temp = shopData.ShopList[i + 1];
+                        shopData.ShopList[i + 1] = shopData.ShopList[i];
+                        shopData.ShopList[i] = temp;
+                    }
+                    if (GUILayout.Button("Clear"))
+                    {
+                        shopData.ShopList.RemoveAt(i);
+                    }
+                    EditorGUILayout.EndVertical();
+
+                    EditorGUILayout.EndHorizontal();
+                }
+                //EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndVertical();
                 sid.ApplyModifiedProperties();
                 //GUILayout.EndArea();
             }
@@ -168,5 +236,15 @@ public class ShopDesignerWindow : EditorWindow
         shopInventorySection.height = 40;
 
         GUI.DrawTexture(shopInventorySection, shopInventorySectionTexture);
+    }
+
+    void DrawItemThumbnail()
+    {
+
+    }
+
+    void SaveShopData()
+    {
+
     }
 }

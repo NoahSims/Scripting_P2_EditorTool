@@ -19,7 +19,7 @@ public class ShopItemData : ScriptableObject
 {
     public LootableObject shopItem = null;
     public int Quantity = -1;
-    public int SellPrice = 0;
-    public int RefundPrice = 0;
+    public float SellMultiplier = 1f;
+    public float RefundMultiplier = 1f;
 
 }

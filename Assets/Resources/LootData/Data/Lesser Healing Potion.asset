@@ -16,5 +16,6 @@ MonoBehaviour:
   displayName: Lesser Healing Potion
   monetaryValue: 50
   description: Heals you a small amount
+  thumbnail: {fileID: 2800000, guid: f11980b73f2175a48a46a099a0248318, type: 3}
   potionEffect: 0
   potionStrength: 20
