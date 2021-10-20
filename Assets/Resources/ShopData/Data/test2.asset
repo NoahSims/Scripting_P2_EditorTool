@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af16c62886aa45c44ad71e4737cfa111, type: 3}
+  m_Name: test2
+  m_EditorClassIdentifier: 
+  shopName: test2
+  canBuyFromPlayer: 0
+  hasLimitedMoney: 0
+  money: 0
+  ShopInventoryList:
+  - shopItem: {fileID: 11400000, guid: b1eece0c61e3d3d42ac377646a51e498, type: 2}
+    HasLimitedQuantity: 1
+    Quantity: 1
+    SellMultiplier: 1
+    RefundMultiplier: 1
+  - shopItem: {fileID: 11400000, guid: 2720833e58fdf3e48a89dfe2923a9135, type: 2}
+    HasLimitedQuantity: 1
+    Quantity: 1
+    SellMultiplier: 1
+    RefundMultiplier: 1
+  - shopItem: {fileID: 11400000, guid: 7e2b619edd0d48441893d70949e84547, type: 2}
+    HasLimitedQuantity: 1
+    Quantity: 1
+    SellMultiplier: 1
+    RefundMultiplier: 1

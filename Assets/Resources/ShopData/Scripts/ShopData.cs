@@ -10,14 +10,14 @@ public class ShopData : ScriptableObject
     public bool hasLimitedMoney = false;
     public int money;
 
-    public List<ShopItemData> ShopList = new List<ShopItemData>();
+    public List<ShopItemData> ShopInventoryList = new List<ShopItemData>();
 
 }
 
 [System.Serializable]
 public class ShopItemData
 {
-    public LootableObject shopItem = null;
+    public InventoryObject shopItem = null;
     public bool HasLimitedQuantity = true;
     public int Quantity = 1;
     public float SellMultiplier = 1f;

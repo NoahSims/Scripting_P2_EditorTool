@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LootableObject : ScriptableObject
+public class InventoryObject : ScriptableObject
 {
-    [Header("LootableObject")]
-    public GameObject prefab;
+    [Header("InventoryObject")]
     public string displayName;
     public int monetaryValue;
     public string description;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenuAttribute(fileName = "New Weapon", menuName = "Lootable Object/ Weapon")]
-public class Weapon : LootableObject
+public class Weapon : InventoryObject
 {
     [Header("Weapon")]
     public WeaponTypes weaponType;

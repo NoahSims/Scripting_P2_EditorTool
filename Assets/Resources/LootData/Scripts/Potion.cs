@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenuAttribute(fileName = "New Potion", menuName = "Lootable Object/ Potion")]
-public class Potion : LootableObject
+public class Potion : InventoryObject
 {
     [Header("Potion")]
     public PotionEffects potionEffect;
