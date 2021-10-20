@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenuAttribute(fileName = "New Potion", menuName = "Lootable Object/ Potion")]
 public class Potion : LootableObject
 {
+    [Header("Potion")]
     public PotionEffects potionEffect;
     public int potionStrength;
 

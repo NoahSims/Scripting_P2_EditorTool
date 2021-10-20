@@ -18,6 +18,7 @@ public class ShopData : ScriptableObject
 public class ShopItemData : ScriptableObject
 {
     public LootableObject shopItem = null;
+    public bool HasLimitedQuantity = true;
     public int Quantity = -1;
     public float SellMultiplier = 1f;
     public float RefundMultiplier = 1f;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LootableObject : ScriptableObject
 {
+    [Header("LootableObject")]
     public GameObject prefab;
     public string displayName;
     public int monetaryValue;

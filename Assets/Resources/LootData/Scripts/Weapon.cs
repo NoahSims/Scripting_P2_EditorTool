@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenuAttribute(fileName = "New Weapon", menuName = "Lootable Object/ Weapon")]
 public class Weapon : LootableObject
 {
+    [Header("Weapon")]
     public WeaponTypes weaponType;
     public DamageTypes damageType;
     public ElementalTypes elementalType;
