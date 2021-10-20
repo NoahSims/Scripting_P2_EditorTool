@@ -66,6 +66,7 @@ public class ShopDesignerWindow : EditorWindow
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Can buy items from player");
+        GUILayout.FlexibleSpace();
         shopData.canBuyFromPlayer = EditorGUILayout.Toggle(shopData.canBuyFromPlayer);
         EditorGUILayout.EndHorizontal();
 
@@ -73,6 +74,7 @@ public class ShopDesignerWindow : EditorWindow
         {
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Has limited Money");
+            GUILayout.FlexibleSpace();
             shopData.hasLimitedMoney = EditorGUILayout.Toggle(shopData.hasLimitedMoney);
             EditorGUILayout.EndHorizontal();
 
@@ -80,12 +82,13 @@ public class ShopDesignerWindow : EditorWindow
             {
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Label("Money Available");
+                GUILayout.FlexibleSpace();
                 shopData.money = EditorGUILayout.IntField(shopData.money);
                 EditorGUILayout.EndHorizontal();
             }
         }
 
-        
+
         /*
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("List");
@@ -98,13 +101,20 @@ public class ShopDesignerWindow : EditorWindow
         EditorGUILayout.PropertyField(shopInventoryList, true);
         sd.ApplyModifiedProperties();
         */
-        
-        
 
-        
+
+
+
+
+        EditorGUILayout.BeginHorizontal();
         showInventory = EditorGUILayout.Foldout(showInventory, "Shop Inventory");
+        GUILayout.FlexibleSpace();
+        tempCapacity = EditorGUILayout.DelayedIntField(tempCapacity);
+        tempCapacity = (int)Mathf.Clamp(tempCapacity, 0, int.MaxValue);
+        EditorGUILayout.EndHorizontal();
         if (showInventory)
         {
+            /*
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Size");
             
@@ -113,14 +123,15 @@ public class ShopDesignerWindow : EditorWindow
             //shopData.ShopList.Capacity = tempCapacity;
             //Debug.Log("Quatntity = " + tempCapacity);
             EditorGUILayout.EndHorizontal();
+            */
 
             int numToAdd = tempCapacity - shopData.ShopList.Count;
             if (numToAdd > 0)
             {
                 for (int i = 0; i < numToAdd; i++)
                 {
-                    shopData.ShopList.Add((ShopItemData)ScriptableObject.CreateInstance(typeof(ShopItemData)));
-                    //shopData.ShopList.Add(new ShopItemData());
+                    //shopData.ShopList.Add((ShopItemData)ScriptableObject.CreateInstance(typeof(ShopItemData)));
+                    shopData.ShopList.Add(new ShopItemData());
                 }
             }
 
@@ -141,19 +152,22 @@ public class ShopDesignerWindow : EditorWindow
                 EditorGUILayout.BeginVertical("box");
                 //EditorGUILayout.BeginHorizontal("box", GUILayout.Height(40f));
                 //GUILayout.FlexibleSpace();
-                SerializedObject sid = new SerializedObject(shopData.ShopList[i]);
-                SerializedProperty shopItem = sid.FindProperty("shopItem");
-                LootableObject shopObject = (LootableObject)shopItem.objectReferenceValue;
+                //SerializedObject sid = new SerializedObject(shopData.ShopList[i]);
+                //SerializedProperty shopItem = sid.FindProperty("shopItem");
+                //LootableObject shopObject = (LootableObject)shopItem.objectReferenceValue;
+                LootableObject shopObject = shopData.ShopList[i].shopItem;
                 
                 if (shopObject == null)
                 {
-                    //GUILayout.Label("Enter an item");
-                    EditorGUILayout.PropertyField(shopItem, new GUIContent("Enter an item"), true);
+                    GUILayout.Label("Enter an item");
+                    //EditorGUILayout.PropertyField(shopItem, new GUIContent("Enter an item"), true);
+                    shopData.ShopList[i].shopItem = (LootableObject)EditorGUILayout.ObjectField(shopData.ShopList[i].shopItem, typeof(LootableObject), false);
                 }
                 else
                 {
-                    
-                    EditorGUILayout.PropertyField(shopItem, true);
+
+                    //EditorGUILayout.PropertyField(shopItem, true);
+                    shopData.ShopList[i].shopItem = (LootableObject)EditorGUILayout.ObjectField(shopData.ShopList[i].shopItem, typeof(LootableObject), false);
 
                     EditorGUILayout.BeginHorizontal();
 
@@ -170,21 +184,30 @@ public class ShopDesignerWindow : EditorWindow
                     // item stats
                     EditorGUILayout.BeginVertical();
                     EditorGUILayout.BeginHorizontal();
-                    SerializedProperty shopItemHasLimitedQuantity = sid.FindProperty("HasLimitedQuantity");
-                    EditorGUILayout.PropertyField(shopItemHasLimitedQuantity, true);
-                    if (shopItemHasLimitedQuantity.boolValue)
+                    //SerializedProperty shopItemHasLimitedQuantity = sid.FindProperty("HasLimitedQuantity");
+                    //EditorGUILayout.PropertyField(shopItemHasLimitedQuantity, true);
+                    //if (shopItemHasLimitedQuantity.boolValue)
+                    GUILayout.Label("Has Limited Quantity");
+                    shopData.ShopList[i].HasLimitedQuantity = EditorGUILayout.Toggle(shopData.ShopList[i].HasLimitedQuantity, GUILayout.Width(50));
+                    if (shopData.ShopList[i].HasLimitedQuantity)
                     {
-                        SerializedProperty shopItemQuant = sid.FindProperty("Quantity");
-                        EditorGUILayout.PropertyField(shopItemQuant, true);
+                        //SerializedProperty shopItemQuant = sid.FindProperty("Quantity");
+                        //EditorGUILayout.PropertyField(shopItemQuant, true);
+                        GUILayout.Label("Quantity");
+                        shopData.ShopList[i].Quantity = EditorGUILayout.IntField(shopData.ShopList[i].Quantity, GUILayout.Width(130));
+
                     }
                     GUILayout.FlexibleSpace();
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.BeginHorizontal();
                     GUILayout.Label("Base value: {" + shopObject.monetaryValue + "} * ");
-                    SerializedProperty shopItemSellMultiplier = sid.FindProperty("SellMultiplier");
-                    EditorGUILayout.PropertyField(shopItemSellMultiplier, true);
-                    GUILayout.Label(" = " + Mathf.Round(shopObject.monetaryValue * shopItemSellMultiplier.floatValue));
+                    //SerializedProperty shopItemSellMultiplier = sid.FindProperty("SellMultiplier");
+                    //EditorGUILayout.PropertyField(shopItemSellMultiplier, true);
+                    GUILayout.Label("Sell Multiplier      ");
+                    shopData.ShopList[i].SellMultiplier = EditorGUILayout.FloatField(shopData.ShopList[i].SellMultiplier, GUILayout.Width(100));
+                    //GUILayout.Label(" = " + Mathf.Round(shopObject.monetaryValue * shopItemSellMultiplier.floatValue));
+                    GUILayout.Label(" = " + Mathf.Round(shopObject.monetaryValue * shopData.ShopList[i].SellMultiplier));
                     GUILayout.FlexibleSpace();
                     EditorGUILayout.EndHorizontal();
 
@@ -192,9 +215,12 @@ public class ShopDesignerWindow : EditorWindow
                     {
                         EditorGUILayout.BeginHorizontal();
                         GUILayout.Label("Base value: {" + shopObject.monetaryValue + "} * ");
-                        SerializedProperty shopItemRefundMultiplier = sid.FindProperty("RefundMultiplier");
-                        EditorGUILayout.PropertyField(shopItemRefundMultiplier, true);
-                        GUILayout.Label(" = -" + Mathf.Round(shopObject.monetaryValue * shopItemRefundMultiplier.floatValue));
+                        //SerializedProperty shopItemRefundMultiplier = sid.FindProperty("RefundMultiplier");
+                        //EditorGUILayout.PropertyField(shopItemRefundMultiplier, true);
+                        GUILayout.Label("Refund Multiplier");
+                        shopData.ShopList[i].RefundMultiplier = EditorGUILayout.FloatField(shopData.ShopList[i].RefundMultiplier, GUILayout.Width(100));
+                        //GUILayout.Label(" = -" + Mathf.Round(shopObject.monetaryValue * shopItemRefundMultiplier.floatValue));
+                        GUILayout.Label(" = -" + Mathf.Round(shopObject.monetaryValue * shopData.ShopList[i].RefundMultiplier));
                         GUILayout.FlexibleSpace();
                         EditorGUILayout.EndHorizontal();
                     }
@@ -218,6 +244,7 @@ public class ShopDesignerWindow : EditorWindow
                     if (GUILayout.Button("Clear"))
                     {
                         shopData.ShopList.RemoveAt(i);
+                        tempCapacity--;
                     }
                     EditorGUILayout.EndVertical();
 
@@ -225,7 +252,7 @@ public class ShopDesignerWindow : EditorWindow
                 }
                 //EditorGUILayout.EndHorizontal();
                 EditorGUILayout.EndVertical();
-                sid.ApplyModifiedProperties();
+                //sid.ApplyModifiedProperties();
                 //GUILayout.EndArea();
             }
 
@@ -253,6 +280,17 @@ public class ShopDesignerWindow : EditorWindow
 
     void SaveShopData()
     {
+        for (int i = 0; i < shopData.ShopList.Count; i++)
+        {
+            if(shopData.ShopList[i].shopItem == null)
+            {
+                Debug.Log("remove " + i);
+                shopData.ShopList.RemoveAt(i);
+                tempCapacity--;
+                i--;
+            }
+        }
+
         string dataPath = "Assets/Resources/ShopData/Data/";
         dataPath += ShopInfo.shopName + ".asset";
         AssetDatabase.CreateAsset(ShopInfo, dataPath);

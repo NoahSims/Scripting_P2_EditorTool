@@ -15,12 +15,13 @@ public class ShopData : ScriptableObject
 }
 
 [System.Serializable]
-public class ShopItemData : ScriptableObject
+public class ShopItemData
 {
     public LootableObject shopItem = null;
     public bool HasLimitedQuantity = true;
-    public int Quantity = -1;
+    public int Quantity = 1;
     public float SellMultiplier = 1f;
     public float RefundMultiplier = 1f;
 
+    public ShopItemData() { }
 }
