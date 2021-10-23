@@ -10,19 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af16c62886aa45c44ad71e4737cfa111, type: 3}
-  m_Name: newTest
+  m_Name: Example Shop
   m_EditorClassIdentifier: 
-  shopName: newTest
-  canBuyFromPlayer: 0
-  hasLimitedMoney: 0
-  money: 0
+  shopName: Example Shop
+  canBuyFromPlayer: 1
+  hasLimitedMoney: 1
+  money: 5000
   ShopInventoryList:
-  - shopItem: {fileID: 11400000, guid: 7e2b619edd0d48441893d70949e84547, type: 2}
+  - shopItem: {fileID: 11400000, guid: b1eece0c61e3d3d42ac377646a51e498, type: 2}
     HasLimitedQuantity: 1
     Quantity: 1
     SellMultiplier: 1
     RefundMultiplier: 1
-  - shopItem: {fileID: 11400000, guid: 7e2b619edd0d48441893d70949e84547, type: 2}
+  - shopItem: {fileID: 11400000, guid: 2720833e58fdf3e48a89dfe2923a9135, type: 2}
+    HasLimitedQuantity: 1
+    Quantity: 1
+    SellMultiplier: 1
+    RefundMultiplier: 1
+  - shopItem: {fileID: 11400000, guid: 4e089eb32cdc99f4a81981b312ecadcb, type: 2}
     HasLimitedQuantity: 1
     Quantity: 1
     SellMultiplier: 1

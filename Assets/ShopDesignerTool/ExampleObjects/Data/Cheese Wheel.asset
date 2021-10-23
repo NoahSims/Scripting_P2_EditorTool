@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af16c62886aa45c44ad71e4737cfa111, type: 3}
-  m_Name: New Shop
+  m_Script: {fileID: 11500000, guid: 0cd85400052437a48994d62902d35b41, type: 3}
+  m_Name: Cheese Wheel
   m_EditorClassIdentifier: 
-  shopName: New Shop
-  canBuyFromPlayer: 0
-  hasLimitedMoney: 0
-  money: 0
-  ShopInventoryList: []
+  displayName: Cheese Wheel
+  monetaryValue: 5
+  description: Wheely Big Cheese
+  thumbnail: {fileID: 2800000, guid: a8f5bc023c9f6644792cf51621d8ce17, type: 3}

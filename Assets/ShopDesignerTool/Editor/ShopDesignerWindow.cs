@@ -25,7 +25,7 @@ public class ShopDesignerWindow : EditorWindow
     static void OpenWindow()
     {
         ShopDesignerWindow window = (ShopDesignerWindow)GetWindow(typeof(ShopDesignerWindow));
-        window.minSize = new Vector2(600, 300);
+        window.minSize = new Vector2(600, 400);
         window.Show();
     }
 
@@ -69,11 +69,13 @@ public class ShopDesignerWindow : EditorWindow
             }
             shopData = editingShop;
             shopInventorySize = shopData.ShopInventoryList.Count;
+            assetDataPath = AssetDatabase.GetAssetPath(editingShop);
         }
         else if(editingShop == null && isEditingShop)
         {
             isEditingShop = false;
-            shopData = (ShopData)ScriptableObject.CreateInstance(typeof(ShopData));
+            InitData();
+            //shopData = (ShopData)ScriptableObject.CreateInstance(typeof(ShopData));
         }
         EditorGUILayout.EndHorizontal();
 
@@ -257,6 +259,7 @@ public class ShopDesignerWindow : EditorWindow
         }
         else
         {
+            EditorGUILayout.LabelField("Currently Editing: " + assetDataPath);
             if(GUILayout.Button("Begin New Shop", GUILayout.Height(40)))
             {
                 isEditingShop = false;
@@ -280,6 +283,7 @@ public class ShopDesignerWindow : EditorWindow
 
     void SaveShopData()
     {
+        // Trim excess inventory slots
         for (int i = 0; i < shopData.ShopInventoryList.Count; i++)
         {
             if(shopData.ShopInventoryList[i].shopItem == null)
@@ -291,7 +295,14 @@ public class ShopDesignerWindow : EditorWindow
             }
         }
 
-        assetDataPath = "Assets/Resources/ShopData/Data/";
+        
+
+        assetDataPath = "Assets/ShopDesignerTool/ShopData/Data/";
+        if(!AssetDatabase.IsValidFolder(assetDataPath))
+        {
+            AssetDatabase.CreateFolder("Assets/ShopDesignerTool/ShopData", "Data");
+        }
+
         assetDataPath += ShopInfo.shopName + ".asset";
         AssetDatabase.CreateAsset(ShopInfo, assetDataPath);
 

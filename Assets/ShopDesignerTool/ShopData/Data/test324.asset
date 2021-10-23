@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af16c62886aa45c44ad71e4737cfa111, type: 3}
-  m_Name: asdfa
+  m_Name: test324
   m_EditorClassIdentifier: 
-  shopName: asdfa
-  canBuyFromPlayer: 0
-  hasLimitedMoney: 0
+  shopName: test324
+  canBuyFromPlayer: 1
+  hasLimitedMoney: 1
   money: 0
   ShopInventoryList: []
