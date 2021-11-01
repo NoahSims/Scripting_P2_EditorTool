@@ -1,4 +1,4 @@
-Scripting_P2_EditorTool
+Project for Scripting for Games II
 
 This project was to create a tool for the unity editor.
 My tool, Shop Builder Pro, is designed to assist a game designer in creating a shop for their game. The intention for this was for use in any kind of rpg like game where there may be multiple shops for the player to find, each with their own seperate inventories. This could, however, help in any game with a shop element.\
